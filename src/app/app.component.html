@@ -4,4 +4,14 @@
       [value]="id">{{id}}</option>
 </select>
 
+
+<agm-map
+  [latitude]="currLat"
+  [longitude]="currLong"
+  [zoom]="currZoom"
+  [disableDefaultUI]="false"
+  [zoomControl]="false"
+>
+</agm-map>
+
 <router-outlet></router-outlet>
