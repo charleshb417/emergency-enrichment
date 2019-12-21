@@ -6,12 +6,14 @@ var express = require('express'),
   fs = require('fs'),
   https = require('https');
 
-const options = {
-  key: fs.readFileSync("../ssl/key.pem"),
-  cert: fs.readFileSync("../ssl/cert.pem")
-};
+
 
 global.appRoot = path.resolve(__dirname);
+
+const options = {
+  key: fs.readFileSync(`${global.appRoot}/../ssl/key.pem`),
+  cert: fs.readFileSync(`${global.appRoot}/../ssl/cert.pem`)
+};
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
