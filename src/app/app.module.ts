@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http'
 import { AgmCoreModule } from '@agm/core';
 
 import { environment } from '../environments/environment';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { environment } from '../environments/environment';
     HttpClientModule,
     AgmCoreModule.forRoot({
       apiKey: environment.google_maps_key
-    })
+    }),
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

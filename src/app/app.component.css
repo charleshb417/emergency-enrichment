@@ -2,3 +2,24 @@ agm-map {
   height: 500px;
   width: 500px
 }
+.pane-label {
+  font-weight: bold;
+  display: block;
+}
+
+.pane-value {
+  display: block;
+}
+
+.weather-summary {
+  font-size: 20pt;
+}
+
+.dropdown-label {
+  font-weight: bold;
+  padding-right: 15px;
+}
+
+.pane-separator {
+  margin-top: 10px;
+}

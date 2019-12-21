@@ -7,10 +7,14 @@ import { ViewChild } from '@angular/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
 export class AppComponent {
   title = 'emergency-enrichment';
   reportIDs = [];
   selectedReportID: string = null;
+
+  currData = null;
+  currWeather = null;
 
   // Richmond can be the default
   currLat: number = 37.54;
@@ -37,6 +41,15 @@ export class AppComponent {
       this.currLat = datum['address']['latitude'];
       this.currLong = datum['address']['longitude'];
       this.currZoom = 15;
+
+      let mk = { lat: this.currLat, long: this.currLong };
+      this.markers = [mk];
+
+      this.currData = datum;
+      this.currWeather = res['weather']['currently'];
     })
   }
+
+  markers = []
+
 }

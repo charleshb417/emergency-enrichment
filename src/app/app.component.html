@@ -1,17 +1,105 @@
-<select [(ngModel)]="selectedReportID" (change)="getReport()">
-    <option
-      *ngFor="let id of reportIDs"
-      [value]="id">{{id}}</option>
-</select>
 
 
-<agm-map
-  [latitude]="currLat"
-  [longitude]="currLong"
-  [zoom]="currZoom"
-  [disableDefaultUI]="false"
-  [zoomControl]="false"
->
-</agm-map>
+<div class="container">
+
+
+  <div class="row">
+    <div class="col">
+      <agm-map
+        [latitude]="currLat"
+        [longitude]="currLong"
+        [zoom]="currZoom"
+        [disableDefaultUI]="false"
+        [zoomControl]="false"
+      >
+
+      <agm-marker
+        *ngFor="let m of markers; let i = index"
+        [latitude]="m.lat"
+        [longitude]="m.long"
+        [label]="m.label"
+      >
+
+    <agm-info-window *ngIf="currWeather != null">
+      {{currData.apparatus[0].unit_status.dispatched.timestamp}}
+    </agm-info-window>
+
+  </agm-marker>
+
+      </agm-map>
+    </div>
+    <div class="col">
+
+      <div class="row">
+        <span class="dropdown-label">Incident Reports:</span>
+          <select id="reportSelect" [(ngModel)]="selectedReportID" (change)="getReport()">
+              <option
+                *ngFor="let id of reportIDs"
+                [value]="id">{{id}}</option>
+          </select>
+      </div>
+      <hr/>
+
+      <div *ngIf="currWeather != null" class="pane-separator">
+        <h2>Weather</h2>
+        <div class="weather-summary">{{currWeather.summary}}, {{currWeather.temperature | number : '1.0-0' }}°</div>
+
+        <div class="row">
+          <div class="col">
+            <span class="pane-label">Percipitation Probability</span>
+            <span class="pane-label">Dew Point</span>
+            <span class="pane-label">Humidity</span>
+            <span class="pane-label">Pressure</span>
+            <span class="pane-label">Wind Speed</span>
+          </div>
+          <div class="col">
+            <span class="pane-value">{{currWeather.precipProbability}}</span>
+            <span class="pane-value">{{currWeather.dewPoint}}</span>
+            <span class="pane-value">{{currWeather.humidity}}</span>
+            <span class="pane-value">{{currWeather.pressure}}</span>
+            <span class="pane-value">{{currWeather.windSpeed}}</span>
+          </div>
+        </div>
+      </div>
+      <hr/>
+
+      <div *ngIf="currData != null" class="pane-separator">
+        <h2>Incident Details</h2>
+        <div class="row">
+            <span class="pane-label">Event Date / Time</span>
+        </div>
+        <div class="row">
+            <span class="pane-value">{{currData.apparatus[0].unit_status.dispatched.timestamp}}</span>
+        </div>
+        <div class="row">
+            <span class="pane-label">Address</span>
+        </div>
+        <div class="row">
+            <span class="pane-value">
+              {{currData.address.address_line1}}
+              {{currData.address.address_line1}}
+              {{currData.address.city}}, {{currData.address.state}}<br/>
+            </span>
+        </div>
+        <div class="row">
+          <span class="pane-label">Description<br/></span>
+        </div>
+        <div class="row">
+          <span class="pane-value">{{currData.description.comments}}<br/></span>
+        </div>
+        <div class="row">
+          <span class="pane-label">Department Information<br/></span>
+        </div>
+        <div class="row">
+          <span class="pane-value">{{currData.fire_department.name}}</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="row">
+  </div>
+</div>
+
 
 <router-outlet></router-outlet>
